@@ -3,9 +3,11 @@ package br.com.lojadebrinquedos.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -54,5 +56,26 @@ public class ProdutoController {
 	public List<Produto> pesquisarPorCategoria(@PathVariable String categoria) {
 		List<Produto> produtos = produtoRepository.findByCategoria(categoria);
 		return produtos;
+	}
+	
+	// Put
+	@PutMapping("/{id}")
+	public Produto atualizarProduto(@PathVariable Integer id, @RequestBody Produto produto) {
+		pesquisarPorId(id);
+		produto.setDescricao(produto.getDescricao());
+		produto.setCategoria(produto.getCategoria());
+		produto.setMarca(produto.getMarca());
+		produto.setImagem(produto.getImagem());
+		produto.setValor(produto.getValor());
+		produto.setDetalhes(produto.getDetalhes());
+		produtoRepository.save(produto);
+		return produto;
+	}
+	
+	// Delete
+	@DeleteMapping("/{id}")
+	public String apagarProduto(@PathVariable("id") Integer id) {
+		produtoRepository.deleteById(id);
+		return "Produto apagado com sucesso!";
 	}
 }
