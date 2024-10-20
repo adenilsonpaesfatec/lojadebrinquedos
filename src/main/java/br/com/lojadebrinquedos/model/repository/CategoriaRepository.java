@@ -1,9 +1,9 @@
 package br.com.lojadebrinquedos.model.repository;
 
-import br.com.lojadebrinquedos.model.Produto;
+import br.com.lojadebrinquedos.model.Categoria;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ProdutoRepository extends JpaRepository<Produto, Integer> {
+public interface CategoriaRepository extends JpaRepository<Categoria, Integer> {
 }
